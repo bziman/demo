@@ -373,7 +373,12 @@ public class CurrentServlet extends HttpServlet {
     try {
       String query = request.getQueryString();
       if (query == null || query.isEmpty()) {
-        throw new VisitException(Status.YOUR_BAD, INVALID_REQUEST);
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println(
+            "<h1>Merchant Visit Api Demo</h1><p>Please send well-formed"
+            + " requests that conform with the provided specification.</p>");
+        return;
       }
       String[] q = query.split("&");
       ImmutableSet<Visit> visits;
